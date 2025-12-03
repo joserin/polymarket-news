@@ -1,6 +1,10 @@
 # build output
 dist/
 
+# static site output
+generated_comments/
+audio_cache/
+
 # generated types
 .astro/
 
