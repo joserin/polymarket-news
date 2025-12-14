@@ -29,8 +29,8 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 400, headers: { "Content-Type": "application/json" } }
     );
   }
-
-  const filename = `${id}.txt`;
+  const name = id + marketQuestion.slice(0, 10);
+  const filename = `${name}.txt`;
   const filePath = path.join(CACHE_DIR, filename);
 
   // --- LÓGICA DE CACHE / PERSISTENCIA ---

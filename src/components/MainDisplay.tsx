@@ -233,7 +233,7 @@ const MainDisplay: React.FC<MainDisplayProps>  = ({ prediction, timeUntilNext })
     );
 
     return (
-        <div className='flex flex-col min-h-screen'>
+        <div className='flex flex-col min-h-screen w-full'>
 
             {/* Elemento de Audio para reproducir el TTS de Hugging Face 
             <audio 
@@ -254,7 +254,7 @@ const MainDisplay: React.FC<MainDisplayProps>  = ({ prediction, timeUntilNext })
                     <img 
                         src={prediction.image} 
                         alt="background" 
-                        className="w-full h-full object-cover opacity-80 blur-sm scale-110 transition-transform duration-[60s] ease-linear"
+                        className="w-full h-full object-cover opacity-70"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/80 to-slate-900/50" />
                 </div>
@@ -392,7 +392,7 @@ const MainDisplay: React.FC<MainDisplayProps>  = ({ prediction, timeUntilNext })
                     </div>
 
                     {/* Timer Bar */}
-                    <div className="flex items-center gap-4 text-slate-500 mt-4">
+                    <div className="flex items-center gap-4 text-slate-500 mt-6">
                         <div className="flex-1 h-3 bg-slate-800 rounded-full overflow-hidden">
                             <div 
                                 className="h-full bg-blue-500 transition-all duration-1000 ease-linear"

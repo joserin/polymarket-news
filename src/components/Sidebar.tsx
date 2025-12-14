@@ -1,8 +1,7 @@
 import React from 'react';
-import type { CleanPrediction } from '../env.d';
 
 interface SidebarProps {
-  predictions: CleanPrediction[];
+  predictions: any[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ predictions }) => {
@@ -11,6 +10,18 @@ const Sidebar: React.FC<SidebarProps> = ({ predictions }) => {
     if (vol >= 1000) return `$${(vol / 1000).toFixed(1)}K`;
     return `$${vol}`;
   };
+
+  function formatearSoloFecha(fechaISO: any) {
+    if (!fechaISO) return '';
+
+    const fechaObj = new Date(fechaISO);
+    const opcionesSoloFecha: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: '2-digit', 
+        day: '2-digit'    
+    };
+    return fechaObj.toLocaleDateString('en-US', opcionesSoloFecha);
+  }
 
   return (
     <div className="w-full bg-slate-900 border-l border-slate-800 flex flex-col h-full overflow-hidden">
@@ -43,23 +54,22 @@ const Sidebar: React.FC<SidebarProps> = ({ predictions }) => {
               <span className="text-xs font-mono text-slate-500">#{index + 1}</span>
 
               <h3 className="text-sm font-medium max-w-[70%] text-center text-slate-200 line-clamp-2 mb-1 leading-snug group-hover:text-white">
-                {item.question}
+                {item.title}
               </h3>
               
               <span className="text-xs font-medium text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded">
-                {formatVolume(item.volume)} Vol
+                {formatVolume(item.volume24hr)} Vol
               </span>
             </section>
-
-            <section className="flex flex-row gap-2 justify-between items-center">
-              {item.outcomes.slice(0, 2).map((outcome, i) => (
-                <div key={i} className="flex justify-between items-center w-1/3">
-                  <span className="text-slate-400">{outcome.label}</span>
-                  <span className={`font-mono font-bold ${outcome.price > 0.5 ? 'text-blue-400' : 'text-slate-500'}`}>
-                    {(outcome.price * 100).toFixed(1)}%
-                  </span>
-                </div>
-              ))}
+            <section className="flex flex-row gap-5 justify-between items-center">
+              <article className="text-center flex gap-5 w-1/2 justify-center">
+                <span>start</span>
+                <p>{formatearSoloFecha(item.startDate)}</p>
+              </article>
+              <article className="text-center flex gap-5 w-1/2 justify-center">
+                <span>End</span>
+                <p>{formatearSoloFecha(item.endDate)}</p>
+              </article>
             </section>
           </div>
         ))}
